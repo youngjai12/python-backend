@@ -1,0 +1,2 @@
+konlpy
+customized_konlpy
