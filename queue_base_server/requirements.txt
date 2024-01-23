@@ -1,0 +1,11 @@
+numpy
+scikit-learn
+psutil
+setuptools
+wheel
+pandas
+redis
+celery==4.4.7
+kombu<4.7
+tensorflow==2.13.0
+python-json-logger
