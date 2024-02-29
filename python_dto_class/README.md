@@ -17,8 +17,13 @@
 - pydantic
 - TypedDict
 
-#### 실험결과 
-- TypedDictf : 200만개 타입변환해서 객체화: 0:00:01.616063
-  - 이건 그냥 일반 dict랑 똑같음. 그래서 성능이 당연히 최상
+#### 실험결과: TypeConversion(특정 field의 타입)
+- 결론 
+  - nested한 경우가 아니라, 단순히 type변환 정도로 데이터를 담는거면 그냥 attrs쓰자.  
+- TypedDictf : 500만개 타입변환해서 객체화: 0:00:01.616063
+  - 이건 그냥 일반 dict랑 똑같음. 그래서 성능이 당연히 최상. 
   - 다만, pure python의 dict는 type을 강제할 수 없으니, 각 field에 대한 type을 좀 강제할 수 있다정도임
-- attrs : 0:00:03.500991
+- cattrs : 0:00:09.241433
+  - `cattrs_converter.structure(obj, [deserialize할 cattrs객체])` 을 이용해서 deserialize 
+  - 원하는 형태로 바꿔주기는 함. 
+- attrs : 0:00:06.942440
