@@ -25,6 +25,7 @@ class RestClientResponse:
 
 
 class NonBlockingRestClient:
+    url = "https://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&gicode=A{}&cID=&MenuYn=Y&ReportGB=&NewMenuID=103&stkGb=701"
     def __init__(
         self, pool_size: int = 10, connect_timeout: int = 5, read_timeout: int = 20
     ) -> None:
@@ -33,10 +34,11 @@ class NonBlockingRestClient:
         self.read_timeout = read_timeout
         self._session: ClientSession = None
         self._loop: AbstractEventLoop = None
-        self.url = "https://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&gicode=A{}&cID=&MenuYn=Y&ReportGB=&NewMenuID=103&stkGb=701"
 
-    def get_stock_request_url(self, stock):
-        return self.url.format(stock)
+
+    @classmethod
+    def get_stock_request_url(cls, stock):
+        return cls.url.format(stock)
 
     async def get_session(self) -> ClientSession:
         should_renew_session = self._session is None
